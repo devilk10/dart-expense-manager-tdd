@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
-import 'package:cli/cli.dart' as cli;
+import 'package:cli/Transaction.dart';
+import 'package:cli/BudgetTracker.dart';
 
 void main(List<String> arguments) {
   print(arguments);
@@ -12,8 +11,9 @@ void main(List<String> arguments) {
     DateTime date = DateTime.parse(arguments[0]);
     String category = arguments[1];
     double amount = double.parse(arguments[2]);
-    String message = arguments[3];
-    print("transaction added for $date $category $amount and $message");
+    String description = arguments[3];
+    BudgetTracker().add(Transaction(date, category, amount, description));
+    print("transaction added for $date $category $amount and $description");
   } on Exception catch (_, e) {
     print("*************** wrong format alert *************");
     print(
