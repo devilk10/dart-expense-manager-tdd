@@ -11,29 +11,31 @@ void main() {
   });
 
   test('should add transactions in transaction list', () {
-    budgetTracker
-        .add(Transaction(dateTime, "category", 100, "some description"));
+    budgetTracker.add(Expense(dateTime, "category", 100, "some description"));
     List<Transaction> transactions = [
-      Transaction(dateTime, "category", 100, "some description"),
+      Expense(dateTime, "category", 100, "some description"),
     ];
     expect(budgetTracker.get(), transactions);
   });
 
   test("should return expense of category entertainment", () {
-    var transaction =
-        Transaction(dateTime, "entertainment", 100, "description");
+    var transaction = Expense(dateTime, "entertainment", 100, "description");
     budgetTracker.add(transaction);
     expect(budgetTracker.getTransactionsByCategory("entertainment"),
         [transaction]);
   });
 
   test("should return total expenses", () {
-    budgetTracker
-        .add(Transaction(dateTime, "entertainment", 100, "description"));
-    budgetTracker
-        .add(Transaction(dateTime, "entertainment", 70, "description"));
-    budgetTracker
-        .add(Transaction(dateTime, "entertainment", 80, "description"));
-    expect(budgetTracker.totalExpenses(), 250.00);
+    budgetTracker.add(Expense(dateTime, "entertainment", 100, "description"));
+    budgetTracker.add(Income(dateTime, "entertainment", 70, "description"));
+    budgetTracker.add(Expense(dateTime, "entertainment", 80, "description"));
+    expect(budgetTracker.totalExpenses(), 180.00);
+  });
+
+  test("should return total income", () {
+    budgetTracker.add(Expense(dateTime, "entertainment", 100, "description"));
+    budgetTracker.add(Income(dateTime, "entertainment", 70, "description"));
+    budgetTracker.add(Expense(dateTime, "entertainment", 80, "description"));
+    expect(budgetTracker.totalIncome(), 70.00);
   });
 }

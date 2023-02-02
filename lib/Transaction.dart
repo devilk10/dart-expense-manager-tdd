@@ -1,4 +1,4 @@
-class Transaction {
+abstract class Transaction {
   final DateTime date;
   final double amount;
   final String description;
@@ -22,4 +22,12 @@ class Transaction {
       amount.hashCode ^
       date.hashCode ^
       category.hashCode;
+}
+
+class Expense extends Transaction {
+  Expense(super.date, super.category, super.amount, super.description);
+}
+
+class Income extends Transaction {
+  Income(super.date, super.category, super.amount, super.description);
 }

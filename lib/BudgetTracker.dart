@@ -14,6 +14,14 @@ class BudgetTracker {
 
   double totalExpenses() {
     return _transactions
+        .whereType<Expense>()
+        .map((e) => e.amount)
+        .reduce((value, element) => value + element);
+  }
+
+  double totalIncome() {
+    return _transactions
+        .whereType<Income>()
         .map((e) => e.amount)
         .reduce((value, element) => value + element);
   }

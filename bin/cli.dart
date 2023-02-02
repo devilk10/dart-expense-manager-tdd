@@ -12,7 +12,7 @@ void main(List<String> arguments) {
     String category = arguments[1];
     double amount = double.parse(arguments[2]);
     String description = arguments[3];
-    BudgetTracker().add(Transaction(date, category, amount, description));
+    BudgetTracker().add(Expense(date, category, amount, description));
     print("transaction added for $date $category $amount and $description");
   } on Exception catch (_, e) {
     print("*************** wrong format alert *************");
