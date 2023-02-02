@@ -9,8 +9,12 @@ class BudgetTracker {
 
   get() => _transactions;
 
-  List<Transaction> getTransactionsByCategory(String category) {
-    return [];
+  List<Transaction> getTransactionsByCategory(String category) =>
+      _transactions.where((element) => element.category == category).toList();
 
+  double totalExpenses() {
+    return _transactions
+        .map((e) => e.amount)
+        .reduce((value, element) => value + element);
   }
 }

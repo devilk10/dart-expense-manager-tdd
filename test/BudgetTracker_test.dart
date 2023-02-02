@@ -23,6 +23,17 @@ void main() {
     var transaction =
         Transaction(dateTime, "entertainment", 100, "description");
     budgetTracker.add(transaction);
-    expect(budgetTracker.getTransactionsByCategory("entertainment"), transaction);
+    expect(budgetTracker.getTransactionsByCategory("entertainment"),
+        [transaction]);
+  });
+
+  test("should return total expenses", () {
+    budgetTracker
+        .add(Transaction(dateTime, "entertainment", 100, "description"));
+    budgetTracker
+        .add(Transaction(dateTime, "entertainment", 70, "description"));
+    budgetTracker
+        .add(Transaction(dateTime, "entertainment", 80, "description"));
+    expect(budgetTracker.totalExpenses(), 250.00);
   });
 }
