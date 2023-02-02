@@ -1,10 +1,11 @@
 abstract class Transaction {
-  final DateTime date;
-  final double amount;
-  final String description;
-  final String category;
+  final int id;
+  DateTime date;
+  double amount;
+  String description;
+  String category;
 
-  Transaction(this.date, this.category, this.amount, this.description);
+  Transaction(this.id, this.date, this.category, this.amount, this.description);
 
   @override
   bool operator ==(Object other) {
@@ -22,12 +23,29 @@ abstract class Transaction {
       amount.hashCode ^
       date.hashCode ^
       category.hashCode;
+
+  void update(
+      [DateTime? dateTime,
+      String? category,
+      double? amount,
+      String? description]) {
+    if (dateTime != null) date = dateTime;
+    if (category != null) this.category = category;
+    if (amount != null) this.amount = amount;
+    if (description != null) this.description = description;
+  }
+
+  @override
+  String toString() {
+    return "$id $description $amount $category $date";
+  }
 }
 
 class Expense extends Transaction {
-  Expense(super.date, super.category, super.amount, super.description);
+  Expense(
+      super.id, super.date, super.category, super.amount, super.description);
 }
 
 class Income extends Transaction {
-  Income(super.date, super.category, super.amount, super.description);
+  Income(super.id, super.date, super.category, super.amount, super.description);
 }

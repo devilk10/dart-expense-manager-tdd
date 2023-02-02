@@ -25,4 +25,14 @@ class BudgetTracker {
         .map((e) => e.amount)
         .reduce((value, element) => value + element);
   }
+
+  void edit(id,
+      [DateTime? dateTime,
+      String? category,
+      double? amount,
+      String? description]) {
+    _transactions
+        .firstWhere((element) => element.id == id)
+        .update(dateTime, category, amount, description);
+  }
 }
